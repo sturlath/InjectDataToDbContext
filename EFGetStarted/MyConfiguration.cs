@@ -1,11 +1,7 @@
 ﻿using EFGetStarted;
 
-namespace PhysicalStructureService.Configurations;
 
-/// <summary>
-/// Configuration class for Physicial Structure service.
-/// </summary>
-public class PhysicalStructureConfiguration : IPhysicalStructureConfiguration
+public class MyConfiguration : IMyConfiguration
 {
     /// <summary>
     /// Connection string to database.
@@ -16,4 +12,5 @@ public class PhysicalStructureConfiguration : IPhysicalStructureConfiguration
     /// Gets or sets whether the service is configured for cloud.
     /// </summary>
     public bool CloudEnabled { get; set; }
+
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface defining configurations for Physicial Structure service.
 /// </summary>
-public interface IPhysicalStructureConfiguration
+public interface IMyConfiguration
 {
     /// <summary>
     /// Connection string to database.

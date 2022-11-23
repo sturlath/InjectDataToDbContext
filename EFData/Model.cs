@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFGetStarted;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 public class BloggingContext : DbContext
 {
@@ -7,12 +9,34 @@ public class BloggingContext : DbContext
 
     public string DbPath { get; }
 
+    public IMyConfiguration? PhysicalStructureConfiguration { get; }
+
     public BloggingContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path, "blogging.db");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        Debugger.Launch();
+
+        // how to get data to here? I could not get this to work
+        //var myConfiguration = this.GetService<IMyConfiguration>();
+
+        var cloudEnabled = true;
+
+        if (cloudEnabled)
+        {
+            //modelBuilder.ApplyConfiguration(new CloudCompanyConfiguration());
+        }
+        else
+        {
+            //modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+        }
+    }
+
 
     // The following configures EF to create a Sqlite database file in the
     // special "local" folder for your platform.
