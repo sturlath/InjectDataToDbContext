@@ -1,5 +1,6 @@
 ﻿using EFGetStarted;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Diagnostics;
 
 public class BloggingContext : DbContext
@@ -7,23 +8,30 @@ public class BloggingContext : DbContext
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Post> Posts { get; set; }
 
-    public string DbPath { get; }
+    public string IsCloud { get; }
 
-    public IMyConfiguration? PhysicalStructureConfiguration { get; }
+    public IMyConfiguration? MyConfiguration { get; }
 
-    public BloggingContext()
+    public BloggingContext(DbContextOptions<BloggingContext> options) : base(options)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "blogging.db");
+        Debugger.Launch();
+
+        // Getting the value from .env file
+        IsCloud = Environment.GetEnvironmentVariable("CLOUD");
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            throw new Exception("DbContext has not been configured, can't start the db connection.");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        Debugger.Launch();
-
-        // how to get data to here? I could not get this to work
-        //var myConfiguration = this.GetService<IMyConfiguration>();
+        // This also works (first when I was trying this out I got lots of errors that for some reason I didn´t get this time around)
+        var myConfiguration = this.GetService<IMyConfiguration>();
 
         var cloudEnabled = true;
 
@@ -36,12 +44,6 @@ public class BloggingContext : DbContext
             //modelBuilder.ApplyConfiguration(new CompanyConfiguration());
         }
     }
-
-
-    // The following configures EF to create a Sqlite database file in the
-    // special "local" folder for your platform.
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
 }
 
 public class Blog

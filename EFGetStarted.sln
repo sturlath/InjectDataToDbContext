@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33103.201
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFGetStarted", "EFGetStarted\EFGetStarted.csproj", "{B6A3601F-A416-45ED-8439-7774CA092B98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFGetStarted", "EFGetStarted\EFGetStarted.csproj", "{B6A3601F-A416-45ED-8439-7774CA092B98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFData", "EFData\EFData.csproj", "{48D8CB02-7B0D-498A-8165-7ED138051C08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFData", "EFData\EFData.csproj", "{48D8CB02-7B0D-498A-8165-7ED138051C08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{4F8E96F3-0052-45FC-81BE-12FEAA2BF686}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
